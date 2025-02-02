@@ -3,18 +3,14 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = process.env.PORT || 3000;
+app.use(cors());
+app.use(bodyParser.json());
 
-// Middleware
-app.use(cors()); // Allow frontend to communicate with backend
-app.use(bodyParser.json()); // Parse JSON request bodies
-app.use(express.static('public')); // Serve static files
-
-// Temporary storage for inspections (later replace with a database)
+// Temporary storage for inspections (Replace with a database later)
 let inspections = [];
 
 // API endpoint to handle form submissions
-app.post('/submit-inspection', (req, res) => {
+app.post('/api/submit-inspection', (req, res) => {
     const { customerName, address } = req.body;
 
     if (!customerName || !address) {
@@ -29,11 +25,9 @@ app.post('/submit-inspection', (req, res) => {
 });
 
 // API endpoint to get all inspections
-app.get('/inspections', (req, res) => {
+app.get('/api/inspections', (req, res) => {
     res.json(inspections);
 });
 
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+// Export as a serverless function for Vercel
+module.exports = app;
