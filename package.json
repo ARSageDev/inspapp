@@ -1,0 +1,12 @@
+{
+  "name": "inspection-app",
+  "version": "1.0.0",
+  "description": "Inspection App for Mortgage Reports",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
